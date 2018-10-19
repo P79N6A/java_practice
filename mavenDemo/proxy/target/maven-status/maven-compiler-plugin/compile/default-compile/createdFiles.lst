@@ -1,0 +1,5 @@
+com\jiao\proxy\pojo\Person.class
+com\jiao\proxy\service\serviceimpl\UserDao.class
+com\jiao\proxy\service\IUserDao.class
+com\jiao\proxy\ProxyApplication.class
+com\jiao\proxy\aop\Aop.class
