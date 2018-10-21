@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.TypeMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Type">
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="amerce_amount" jdbcType="DOUBLE" property="amerceAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    type_id, type_name, amerce_amount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from type_table
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from type_table
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Type">
+    insert into type_table (type_id, type_name, amerce_amount
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{amerceAmount,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Type">
+    insert into type_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="amerceAmount != null">
+        amerce_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amerceAmount != null">
+        #{amerceAmount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Type">
+    update type_table
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amerceAmount != null">
+        amerce_amount = #{amerceAmount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Type">
+    update type_table
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      amerce_amount = #{amerceAmount,jdbcType=DOUBLE}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Type">
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="amerce_amount" jdbcType="DOUBLE" property="amerceAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    type_id, type_name, amerce_amount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from type_table
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from type_table
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Type">
+    insert into type_table (type_id, type_name, amerce_amount
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{amerceAmount,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Type">
+    insert into type_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="amerceAmount != null">
+        amerce_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amerceAmount != null">
+        #{amerceAmount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Type">
+    update type_table
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="amerceAmount != null">
+        amerce_amount = #{amerceAmount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Type">
+    update type_table
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      amerce_amount = #{amerceAmount,jdbcType=DOUBLE}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+</mapper>

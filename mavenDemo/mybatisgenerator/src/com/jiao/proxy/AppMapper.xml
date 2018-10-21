@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.AppMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.App">
+    <id column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="attend_id" jdbcType="INTEGER" property="attendId" />
+    <result column="app_reason" jdbcType="VARCHAR" property="appReason" />
+    <result column="app_result" jdbcType="BIT" property="appResult" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    app_id, attend_id, app_reason, app_result, type_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_table
+    where app_id = #{appId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_table
+    where app_id = #{appId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.App">
+    insert into app_table (app_id, attend_id, app_reason, 
+      app_result, type_id)
+    values (#{appId,jdbcType=INTEGER}, #{attendId,jdbcType=INTEGER}, #{appReason,jdbcType=VARCHAR}, 
+      #{appResult,jdbcType=BIT}, #{typeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.App">
+    insert into app_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="attendId != null">
+        attend_id,
+      </if>
+      <if test="appReason != null">
+        app_reason,
+      </if>
+      <if test="appResult != null">
+        app_result,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="attendId != null">
+        #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="appReason != null">
+        #{appReason,jdbcType=VARCHAR},
+      </if>
+      <if test="appResult != null">
+        #{appResult,jdbcType=BIT},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.App">
+    update app_table
+    <set>
+      <if test="attendId != null">
+        attend_id = #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="appReason != null">
+        app_reason = #{appReason,jdbcType=VARCHAR},
+      </if>
+      <if test="appResult != null">
+        app_result = #{appResult,jdbcType=BIT},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where app_id = #{appId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.App">
+    update app_table
+    set attend_id = #{attendId,jdbcType=INTEGER},
+      app_reason = #{appReason,jdbcType=VARCHAR},
+      app_result = #{appResult,jdbcType=BIT},
+      type_id = #{typeId,jdbcType=INTEGER}
+    where app_id = #{appId,jdbcType=INTEGER}
+  </update>
+</mapper>

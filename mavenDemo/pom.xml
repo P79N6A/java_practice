@@ -73,5 +73,6 @@
     <modules>
         <module>proxy</module>
         <module>byagent</module>
+        <module>mybatisgenerator</module>
     </modules>
 </project>

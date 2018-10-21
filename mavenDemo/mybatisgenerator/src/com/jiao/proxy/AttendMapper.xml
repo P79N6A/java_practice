@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.AttendMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Attend">
+    <id column="attend_id" jdbcType="INTEGER" property="attendId" />
+    <result column="duty_day" jdbcType="VARCHAR" property="dutyDay" />
+    <result column="punch_time" jdbcType="TIMESTAMP" property="punchTime" />
+    <result column="is_come" jdbcType="BIT" property="isCome" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="emp_id" jdbcType="INTEGER" property="empId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    attend_id, duty_day, punch_time, is_come, type_id, emp_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from attend_table
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from attend_table
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Attend">
+    insert into attend_table (attend_id, duty_day, punch_time, 
+      is_come, type_id, emp_id)
+    values (#{attendId,jdbcType=INTEGER}, #{dutyDay,jdbcType=VARCHAR}, #{punchTime,jdbcType=TIMESTAMP}, 
+      #{isCome,jdbcType=BIT}, #{typeId,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Attend">
+    insert into attend_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attendId != null">
+        attend_id,
+      </if>
+      <if test="dutyDay != null">
+        duty_day,
+      </if>
+      <if test="punchTime != null">
+        punch_time,
+      </if>
+      <if test="isCome != null">
+        is_come,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="empId != null">
+        emp_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attendId != null">
+        #{attendId,jdbcType=INTEGER},
+      </if>
+      <if test="dutyDay != null">
+        #{dutyDay,jdbcType=VARCHAR},
+      </if>
+      <if test="punchTime != null">
+        #{punchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCome != null">
+        #{isCome,jdbcType=BIT},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Attend">
+    update attend_table
+    <set>
+      <if test="dutyDay != null">
+        duty_day = #{dutyDay,jdbcType=VARCHAR},
+      </if>
+      <if test="punchTime != null">
+        punch_time = #{punchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isCome != null">
+        is_come = #{isCome,jdbcType=BIT},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null">
+        emp_id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Attend">
+    update attend_table
+    set duty_day = #{dutyDay,jdbcType=VARCHAR},
+      punch_time = #{punchTime,jdbcType=TIMESTAMP},
+      is_come = #{isCome,jdbcType=BIT},
+      type_id = #{typeId,jdbcType=INTEGER},
+      emp_id = #{empId,jdbcType=INTEGER}
+    where attend_id = #{attendId,jdbcType=INTEGER}
+  </update>
+</mapper>

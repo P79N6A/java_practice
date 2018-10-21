@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.MgrMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Mgr">
+    <id column="mgr_id" jdbcType="INTEGER" property="mgrId" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mgr_id, dept_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mgr_table
+    where mgr_id = #{mgrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mgr_table
+    where mgr_id = #{mgrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Mgr">
+    insert into mgr_table (mgr_id, dept_name)
+    values (#{mgrId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Mgr">
+    insert into mgr_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mgrId != null">
+        mgr_id,
+      </if>
+      <if test="deptName != null">
+        dept_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mgrId != null">
+        #{mgrId,jdbcType=INTEGER},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Mgr">
+    update mgr_table
+    <set>
+      <if test="deptName != null">
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mgr_id = #{mgrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Mgr">
+    update mgr_table
+    set dept_name = #{deptName,jdbcType=VARCHAR}
+    where mgr_id = #{mgrId,jdbcType=INTEGER}
+  </update>
+</mapper>

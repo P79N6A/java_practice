@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.CheckMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Check">
+    <id column="check_id" jdbcType="INTEGER" property="checkId" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="check_result" jdbcType="BIT" property="checkResult" />
+    <result column="check_reason" jdbcType="VARCHAR" property="checkReason" />
+    <result column="mgr_id" jdbcType="INTEGER" property="mgrId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    check_id, app_id, check_result, check_reason, mgr_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from check_table
+    where check_id = #{checkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from check_table
+    where check_id = #{checkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Check">
+    insert into check_table (check_id, app_id, check_result, 
+      check_reason, mgr_id)
+    values (#{checkId,jdbcType=INTEGER}, #{appId,jdbcType=INTEGER}, #{checkResult,jdbcType=BIT}, 
+      #{checkReason,jdbcType=VARCHAR}, #{mgrId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Check">
+    insert into check_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
+        check_id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="checkResult != null">
+        check_result,
+      </if>
+      <if test="checkReason != null">
+        check_reason,
+      </if>
+      <if test="mgrId != null">
+        mgr_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
+        #{checkId,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=BIT},
+      </if>
+      <if test="checkReason != null">
+        #{checkReason,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrId != null">
+        #{mgrId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Check">
+    update check_table
+    <set>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="checkResult != null">
+        check_result = #{checkResult,jdbcType=BIT},
+      </if>
+      <if test="checkReason != null">
+        check_reason = #{checkReason,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrId != null">
+        mgr_id = #{mgrId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where check_id = #{checkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Check">
+    update check_table
+    set app_id = #{appId,jdbcType=INTEGER},
+      check_result = #{checkResult,jdbcType=BIT},
+      check_reason = #{checkReason,jdbcType=VARCHAR},
+      mgr_id = #{mgrId,jdbcType=INTEGER}
+    where check_id = #{checkId,jdbcType=INTEGER}
+  </update>
+</mapper>

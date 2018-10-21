@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.proxy.EmpMapper">
+  <resultMap id="BaseResultMap" type="com.jiao.proxy.Emp">
+    <id column="emp_id" jdbcType="INTEGER" property="empId" />
+    <result column="emp_name" jdbcType="VARCHAR" property="empName" />
+    <result column="emp_pass" jdbcType="VARCHAR" property="empPass" />
+    <result column="emp_salary" jdbcType="DOUBLE" property="empSalary" />
+    <result column="mgr_id" jdbcType="INTEGER" property="mgrId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    emp_id, emp_name, emp_pass, emp_salary, mgr_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emp_table
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from emp_table
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jiao.proxy.Emp">
+    insert into emp_table (emp_id, emp_name, emp_pass, 
+      emp_salary, mgr_id)
+    values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=VARCHAR}, #{empPass,jdbcType=VARCHAR}, 
+      #{empSalary,jdbcType=DOUBLE}, #{mgrId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jiao.proxy.Emp">
+    insert into emp_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        emp_id,
+      </if>
+      <if test="empName != null">
+        emp_name,
+      </if>
+      <if test="empPass != null">
+        emp_pass,
+      </if>
+      <if test="empSalary != null">
+        emp_salary,
+      </if>
+      <if test="mgrId != null">
+        mgr_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empPass != null">
+        #{empPass,jdbcType=VARCHAR},
+      </if>
+      <if test="empSalary != null">
+        #{empSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="mgrId != null">
+        #{mgrId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jiao.proxy.Emp">
+    update emp_table
+    <set>
+      <if test="empName != null">
+        emp_name = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empPass != null">
+        emp_pass = #{empPass,jdbcType=VARCHAR},
+      </if>
+      <if test="empSalary != null">
+        emp_salary = #{empSalary,jdbcType=DOUBLE},
+      </if>
+      <if test="mgrId != null">
+        mgr_id = #{mgrId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jiao.proxy.Emp">
+    update emp_table
+    set emp_name = #{empName,jdbcType=VARCHAR},
+      emp_pass = #{empPass,jdbcType=VARCHAR},
+      emp_salary = #{empSalary,jdbcType=DOUBLE},
+      mgr_id = #{mgrId,jdbcType=INTEGER}
+    where emp_id = #{empId,jdbcType=INTEGER}
+  </update>
+</mapper>

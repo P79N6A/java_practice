@@ -1,5 +1,12 @@
-com\jiao\proxy\pojo\Person.class
+com\jiao\proxy\aop\Aop.class
+com\jiao\proxy\pojo\App.class
 com\jiao\proxy\service\serviceimpl\UserDao.class
+com\jiao\proxy\pojo\Person.class
+com\jiao\proxy\pojo\Check.class
+com\jiao\proxy\pojo\Attend.class
+com\jiao\proxy\pojo\Emp.class
+com\jiao\proxy\pojo\Mgr.class
 com\jiao\proxy\service\IUserDao.class
 com\jiao\proxy\ProxyApplication.class
-com\jiao\proxy\aop\Aop.class
+com\jiao\proxy\pojo\Pay.class
+com\jiao\proxy\pojo\Type.class
