@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.MgrDaoMapper">
+
+    <!--根据需求调整缓存参数：-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <resultMap id="studentResultMap" type="com.jiao.byagent.pojo.MgrVO">
+        <association property="emp"  javaType="com.jiao.proxy.pojo.Emp">
+            <id property="empId" column="emp_id"/>
+            <result property="empName" column="emp_name"/>
+            <result property="empPass" column="emp_pass"/>
+            <result property="empSalary" column="emp_salary"/>
+            <result property="mgrId" column="mgr_id"/>
+        </association>
+        <!--关联映射-->
+        <association property="mgr"  javaType="com.jiao.proxy.pojo.Mgr">
+            <id column="mgrId" property="mgrId"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findByNameAndPass"  resultMap="studentResultMap">
+SELECT * , mgr_table.`mgr_id` AS mgrId FROM emp_table , mgr_table WHERE emp_table.emp_name = "oracle" AND emp_table.emp_pass = "oracle" AND emp_table.mgr_id IS NULL AND emp_table.emp_id = mgr_table.mgr_id
+    </select>
+
+
+    <select id="findByName"  resultMap="studentResultMap">
+        SELECT * , mgr_table.`mgr_id` AS mgrId FROM emp_table , mgr_table WHERE emp_table.emp_name = "oracle"  AND emp_table.mgr_id IS NULL AND emp_table.emp_id = mgr_table.mgr_id
+    </select>
+</mapper>

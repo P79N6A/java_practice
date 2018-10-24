@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = { "com.jiao.byagent.dao" })
+@MapperScan("com.jiao.byagent.dao")
 public class ByagentApplication {
 
 	public static void main(String[] args) {

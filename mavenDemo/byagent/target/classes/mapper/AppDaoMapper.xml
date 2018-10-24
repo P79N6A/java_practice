@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.AppDaoMapper">
+
+    <!--根据需求调整缓存参数：-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <select id="findByEmp"  parameterType="Emp" resultType="App">
+SELECT * FROM `app_table` AS app , `attend_table` AS attend ,`emp_table` AS emp WHERE app.attend_id = attend.attend_id AND attend.emp_id = emp.`emp_id`AND emp.`emp_id` = #{empId}
+    </select>
+
+
+
+</mapper>

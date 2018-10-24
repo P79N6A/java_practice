@@ -1,8 +1,13 @@
 package com.jiao.proxy.pojo;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Attend {
+@Table(name = "attend_table")
+public class Attend implements Serializable {
+    @Id
     private Integer attendId;
 
     private String dutyDay;
@@ -61,5 +66,17 @@ public class Attend {
 
     public void setEmpId(Integer empId) {
         this.empId = empId;
+    }
+
+    @Override
+    public String toString() {
+        return "Attend{" +
+                "attendId=" + attendId +
+                ", dutyDay='" + dutyDay + '\'' +
+                ", punchTime=" + punchTime +
+                ", isCome=" + isCome +
+                ", typeId=" + typeId +
+                ", empId=" + empId +
+                '}';
     }
 }

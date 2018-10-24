@@ -2,9 +2,10 @@ package com.jiao.proxy.pojo;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "app_table")
-public class App {
+public class App implements Serializable {
     @Id
     private Integer appId;
 
@@ -54,5 +55,16 @@ public class App {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
+    }
+
+    @Override
+    public String toString() {
+        return "App{" +
+                "appId=" + appId +
+                ", attendId=" + attendId +
+                ", appReason='" + appReason + '\'' +
+                ", appResult=" + appResult +
+                ", typeId=" + typeId +
+                '}';
     }
 }

@@ -1,6 +1,12 @@
 package com.jiao.proxy.pojo;
 
-public class Check {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Table(name = "check_table")
+public class Check implements Serializable {
+    @Id
     private Integer checkId;
 
     private Integer appId;
@@ -49,5 +55,16 @@ public class Check {
 
     public void setMgrId(Integer mgrId) {
         this.mgrId = mgrId;
+    }
+
+    @Override
+    public String toString() {
+        return "Check{" +
+                "checkId=" + checkId +
+                ", appId=" + appId +
+                ", checkResult=" + checkResult +
+                ", checkReason='" + checkReason + '\'' +
+                ", mgrId=" + mgrId +
+                '}';
     }
 }

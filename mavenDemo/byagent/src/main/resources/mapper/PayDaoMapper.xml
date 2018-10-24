@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.PayDaoMapper">
+
+    <!--根据需求调整缓存参数：-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+
+
+    <resultMap id="studentResultMap" type="com.jiao.byagent.pojo.MgrEmp">
+        <association property="emp"  javaType="com.jiao.proxy.pojo.Emp">
+            <id property="empId" column="emp_id"/>
+            <result property="empName" column="emp_name"/>
+            <result property="empPass" column="emp_pass"/>
+            <result property="empSalary" column="emp_salary"/>
+            <result property="mgrId" column="mgr_id"/>
+        </association>
+        <!--关联映射-->
+        <association property="mgr"  javaType="com.jiao.proxy.pojo.Mgr">
+            <id column="mgr_id" property="mgrId"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="studentResultMap2" type="com.jiao.byagent.pojo.PayVO">
+        <id property="payId" column="pay_id"/>
+        <result property="payMonth" column="pay_month"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="empId"  column="emp_id"/>
+        <!--关联映射-->
+        <association property="emp"  javaType="com.jiao.proxy.pojo.Emp">
+            <id property="empId" column="emp_id"/>
+            <result property="empName" column="emp_name"/>
+            <result property="empPass" column="emp_pass"/>
+            <result property="empSalary" column="emp_salary"/>
+            <result property="mgrId" column="mgr_id"/>
+        </association>
+    </resultMap>
+
+    <select id="findByEmp" parameterType="Emp" resultType="Pay" >
+        SELECT * FROM pay_table as pay WHERE pay.emp_id = #{empId}
+    </select>
+
+    <select id="findByEmpAndMonth"  resultMap="studentResultMap2" >
+       SELECT * ,emp.`emp_id` AS empId FROM pay_table AS pay ,emp_table AS emp WHERE pay.emp_id = #{emp.empId} AND pay.emp_id = emp.emp_id AND pay.pay_month = #{month}
+     </select>
+
+
+</mapper>

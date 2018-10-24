@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
  * Created by jiao on 2018/10/19.
  */
 @Service
-public class UserDao implements IUserDao {
+public class UserDao implements IUserDao  {
     @Override
-    public void save(Person person) {
+    public void save(Person person) throws Throwable {
+
         System.out.println("-----核心业务：保存！！！------");
     }
 }

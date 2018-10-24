@@ -1,6 +1,12 @@
 package com.jiao.proxy.pojo;
 
-public class Emp {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Table(name = "emp_table")
+public class Emp  implements Serializable{
+    @Id
     private Integer empId;
 
     private String empName;
@@ -49,5 +55,16 @@ public class Emp {
 
     public void setMgrId(Integer mgrId) {
         this.mgrId = mgrId;
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", empPass='" + empPass + '\'' +
+                ", empSalary=" + empSalary +
+                ", mgrId=" + mgrId +
+                '}';
     }
 }

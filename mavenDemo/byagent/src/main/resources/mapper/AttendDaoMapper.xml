@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.AttendDaoMapper">
+
+    <!--根据需求调整缓存参数：-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <select id="findByEmpAndDutyday"  resultType="Attend">
+   SELECT * FROM `attend_table` AS attend WHERE attend.emp_id = #{emp.empId} AND attend.duty_day = #{dutyday}
+    </select>
+
+    <select id="fingByEmpAndDutydayAndCome"  resultType="Attend">
+       SELECT * FROM `attend_table` AS attend WHERE attend.emp_id = #{emp.empId} AND attend.duty_day = #{dutyday} AND attend.is_come = #{isCome}
+    </select>
+
+
+    <select id="findByEmpUnAttend"  resultType="Attend">
+        SELECT * FROM `attend_table` WHERE duty_day >= DATE_FORMAT(NOW(), '%Y-%m-%d')-INTERVAL 3 DAY AND attend_table.emp_id = #{emp.empId} AND attend_table.type_id != #{type.typeId}
+    </select>
+
+
+    <select id="findPerfbByEmp"  resultType="int">
+
+    </select>
+
+
+</mapper>

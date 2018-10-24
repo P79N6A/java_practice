@@ -1,12 +1,12 @@
-com\jiao\byagent\mapper\EmpMapper.class
 com\jiao\byagent\service\IUserDao.class
+com\jiao\byagent\mapper\MgrMapper.class
+com\jiao\byagent\controller\TestConroller.class
+com\jiao\byagent\mapper\AppMapper.class
+com\jiao\byagent\mapper\EmpMapper.class
 com\jiao\byagent\mapper\PayMapper.class
 com\jiao\byagent\mapper\TypeMapper.class
 com\jiao\byagent\mapper\CheckMapper.class
-com\jiao\byagent\mapper\MgrMapper.class
-com\jiao\byagent\controller\TestConroller.class
 com\jiao\byagent\service\serviceimpl\UserDao.class
-com\jiao\byagent\mapper\AppMapper.class
 com\jiao\byagent\config\Config.class
 com\jiao\byagent\ByagentApplication.class
 com\jiao\byagent\mapper\AttendMapper.class

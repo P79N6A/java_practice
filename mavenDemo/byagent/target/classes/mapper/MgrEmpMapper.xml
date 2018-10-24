@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.MgrEmpMapper">
+
+    <!--根据需求调整缓存参数：-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+
+
+    <resultMap id="studentResultMap" type="com.jiao.byagent.pojo.MgrEmp">
+        <association property="emp"  javaType="com.jiao.proxy.pojo.Emp">
+        <id property="empId" column="emp_id"/>
+        <result property="empName" column="emp_name"/>
+        <result property="empPass" column="emp_pass"/>
+        <result property="empSalary" column="emp_salary"/>
+        <result property="mgrId" column="mgr_id"/>
+        </association>
+        <!--关联映射-->
+        <association property="mgr"  javaType="com.jiao.proxy.pojo.Mgr">
+            <id column="mgr_id" property="mgrId"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+
+    <select id="findById4"  resultType="com.jiao.byagent.pojo.MgrEmp3" useCache="true">
+      SELECT * FROM emp_table as emp,mgr_table as mgr WHERE emp.mgr_id = mgr.mgr_id
+    </select>
+
+
+
+    <select id="findById5"  resultMap="studentResultMap" useCache="true">
+        SELECT * FROM emp_table as emp,mgr_table as mgr WHERE emp.mgr_id = mgr.mgr_id
+    </select>
+
+</mapper>
