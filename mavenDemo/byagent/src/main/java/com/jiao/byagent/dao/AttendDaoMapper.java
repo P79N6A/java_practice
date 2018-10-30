@@ -1,6 +1,7 @@
 package com.jiao.byagent.dao;
 
 import com.jiao.byagent.base.Mapper;
+import com.jiao.byagent.pojo.AttendVo;
 import com.jiao.proxy.pojo.Attend;
 import com.jiao.proxy.pojo.Emp;
 import com.jiao.proxy.pojo.Type;
@@ -37,16 +38,16 @@ public interface AttendDaoMapper extends Mapper<Attend> {
       * @Author: Mr.Jiao
       * @Date: 2018/10/22
       */
-      List<Attend> findByEmpUnAttend(@Param("emp") Emp emp , @Param("type") Type type) throws Throwable;
+      List<AttendVo> findByEmpUnAttend(@Param("emp") Emp emp , @Param("type") Type type) throws Throwable;
 
 
       /**
-      * @Description: 查询员工上月的考勤绩效
+      * @Description: 查询员工上月的全部考勤
       * @Param:
       * @return:
       * @Author: Mr.Jiao
       * @Date: 2018/10/23
       */
 
-       int findPerfbByEmp(Emp emp )throws Throwable;
+       List<AttendVo> findAttendsByEmp(@Param("emp") Emp emp , @Param("payMonth") String payMonth)throws Throwable;
 }

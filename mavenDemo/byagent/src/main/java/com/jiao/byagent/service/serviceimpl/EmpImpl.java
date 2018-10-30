@@ -1,20 +1,20 @@
 package com.jiao.byagent.service.serviceimpl;
 
 import com.jiao.byagent.dao.*;
+import com.jiao.byagent.pojo.AttendVo;
 import com.jiao.byagent.service.EmpManage;
-import com.jiao.proxy.pojo.Attend;
-import com.jiao.proxy.pojo.Emp;
-import com.jiao.proxy.pojo.Pay;
-import com.jiao.proxy.pojo.Type;
+import com.jiao.proxy.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.ZipEntry;
 
 /**
  * Created by jiao on 2018/10/23.
@@ -68,7 +68,7 @@ public class EmpImpl implements EmpManage {
         Type type = typeDaoMapper.selectByCondition(condition).get(0);
         attend.setTypeId(type.getTypeId());
         attend.setIsCome(false);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dutyday = simpleDateFormat.format(new Date());
         attend.setDutyDay(dutyday);
         attend.setPunchTime(new Date());
@@ -86,41 +86,187 @@ public class EmpImpl implements EmpManage {
     * @Date: 2018/10/23 
     */ 
     @Override
-    public void autoPay() {
+    public void autoPay() throws Throwable{
         List<Emp> emps = empDapMapper.selectAll();
-        emps.forEach(t->{
+        //获取上个月时间
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH, -15);
+        SimpleDateFormat sdf = new  SimpleDateFormat("yyyy-MM");
+        String payMonth = sdf.format(c.getTime());
 
-        });
-
+        for(Emp emp :emps){
+            List<AttendVo> attendsByEmp = attendDaoMapper.findAttendsByEmp(emp, payMonth);
+            Double empSalary = emp.getEmpSalary();
+            for (AttendVo attendVo :attendsByEmp){
+                empSalary+= attendVo.getType().getAmerceAmount();
+            }
+            Pay pay = new Pay();
+            pay.setEmpId(emp.getEmpId());
+            pay.setPayAmount(empSalary);
+            pay.setPayMonth(payMonth);
+            payDaoMapper.insert(pay);
+        }
     }
-
+    
+    /** 
+    * @Description:  验证某个员工是否可打卡
+    * @Param: [user, dutyDay] 
+    * @return: int 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */
     @Override
-    public int validPunch(String user, String dutyDay) {
-        return 0;
+    public int validPunch(String user, String dutyDay) throws Throwable {
+        Emp byName = empDapMapper.findByName(user);
+        List<Attend> byEmpAndDutyday = attendDaoMapper.findByEmpAndDutyday(byName, dutyDay);
+        Date date = new Date();
+        int hours = date.getHours();
+        int length = byEmpAndDutyday.size();
+        if (length == 1){
+            if (!byEmpAndDutyday.get(0).getIsCome()){
+                if (hours < 9){
+                    return COME_PUNCH;
+                }else if ( hours>9 && hours <17){
+                    return BOTH_PUNCH;
+                }else {
+                    return NO_PUNCH;
+                }
+            }else{
+                if ( hours< 20){
+                    return LEAVE_PUNCH;
+                }
+                return NO_PUNCH;
+            }
+        }else {
+            return NO_PUNCH;
+        }
     }
 
+    /** 
+    * @Description:  打卡
+    * @Param: [user, dutyDay, isCome] 
+    * @return: int 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */ 
     @Override
-    public int punch(String user, String dutyDay, boolean isCome) {
-        return 0;
+    public int punch(String user, String dutyDay, boolean isCome) throws Throwable {
+        Emp emp = empDapMapper.findByName(user);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        int hour = date.getHours();
+        String punchTime = simpleDateFormat.format(date);
+        List<Attend> byEmpAndDutyday = attendDaoMapper.findByEmpAndDutyday(emp, dutyDay);
+        Attend attend;
+        if (byEmpAndDutyday.size()==1 && !byEmpAndDutyday.get(0).getIsCome()){
+            if ( hour<9){
+                attend = byEmpAndDutyday.get(0);
+                attend.setPunchTime(date);
+                attend.setIsCome(isCome);
+                attend.setTypeId(1);
+
+            }else{
+                attend = byEmpAndDutyday.get(0);
+                attend.setPunchTime(date);
+                attend.setIsCome(isCome);
+                attend.setTypeId(4);
+            }
+            int i = attendDaoMapper.updateByPrimaryKey(attend);
+            if(i>0)
+                return PUNCH_SUCC;
+            else
+                return  PUNCH_FAIL;
+        }else if(byEmpAndDutyday.size()==1 && byEmpAndDutyday.get(0).getIsCome()){
+            if (isCome == true){
+                return PUNCHED;
+            }else{
+                attend = new Attend();
+                if (  hour <18){
+                    attend.setPunchTime(date);
+                    attend.setIsCome(isCome);
+                    attend.setTypeId(5);
+                    attend.setEmpId(emp.getEmpId());
+
+                }else{
+                    attend.setPunchTime(date);
+                    attend.setIsCome(isCome);
+                    attend.setTypeId(1);
+                    attend.setEmpId(emp.getEmpId());
+                }
+                attend.setDutyDay(dutyDay);
+                int insert = attendDaoMapper.insert(attend);
+                if(insert>0)
+                    return PUNCH_SUCC;
+            }
+
+        }else if (byEmpAndDutyday.size()==2){
+            return PUNCHED;
+        }
+
+        return  PUNCH_FAIL;
     }
 
+    
+    /** 
+    * @Description:  根据员工浏览自己的工资
+    * @Param: [empName] 
+    * @return: java.util.List<com.jiao.proxy.pojo.Pay> 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */ 
     @Override
-    public List<Pay> empSalary(String empName) {
-        return null;
+    public List<Pay> empSalary(String empName) throws Throwable {
+        Emp emp = empDapMapper.findByName(empName);
+        List<Pay> byEmp = payDaoMapper.findByEmp(emp);
+        return byEmp;
     }
 
+    /** 
+    * @Description:  员工查看自己的最近三天非正常打卡
+    * @Param: [empName] 
+    * @return: java.util.List<com.jiao.proxy.pojo.Attend> 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */ 
     @Override
-    public List<Attend> unAttend(String empName) {
-        return null;
+    public List<AttendVo> unAttend(String empName) throws Throwable {
+        Emp emp = empDapMapper.findByName(empName);
+        Type type = new Type();
+        type.setTypeId(1);
+        List<AttendVo> byEmpUnAttend = attendDaoMapper.findByEmpUnAttend(emp,type);
+        return  byEmpUnAttend;
     }
-
+    
+    /** 
+    * @Description:  返回全部的出勤类别
+    * @Param: [] 
+    * @return: java.util.List<com.jiao.proxy.pojo.Type> 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */ 
     @Override
     public List<Type> getAllType() {
-        return null;
+        List<Type> types = typeDaoMapper.selectAll();
+        return types;     
     }
 
+    /** 
+    * @Description:  添加申请
+    * @Param: [attId, typeId, reason] 
+    * @return: boolean 
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/25 
+    */ 
     @Override
     public boolean addApplication(int attId, int typeId, String reason) {
-        return false;
+        App app = new App();
+        app.setAttendId(attId);
+        app.setTypeId(typeId);
+        app.setAppReason(reason);
+        int insert = appDaoMapper.insert(app);
+        if (insert>0)
+            return true;
+        else
+            return false;
     }
 }

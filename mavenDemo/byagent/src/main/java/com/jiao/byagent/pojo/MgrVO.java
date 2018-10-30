@@ -9,4 +9,20 @@ import com.jiao.proxy.pojo.Mgr;
 public class MgrVO {
     Emp emp;
     Mgr mgr;
+
+    public Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Emp emp) {
+        this.emp = emp;
+    }
+
+    public Mgr getMgr() {
+        return mgr;
+    }
+
+    public void setMgr(Mgr mgr) {
+        this.mgr = mgr;
+    }
 }

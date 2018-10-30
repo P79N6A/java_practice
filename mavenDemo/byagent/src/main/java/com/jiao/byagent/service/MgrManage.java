@@ -1,8 +1,8 @@
 package com.jiao.byagent.service;
 
+import com.jiao.byagent.pojo.PayVO;
 import com.jiao.proxy.pojo.App;
 import com.jiao.proxy.pojo.Emp;
-import com.jiao.proxy.pojo.Pay;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface MgrManage {
      * @param mgr 新增的员工名
      * @return 部门上个月工资
      */
-    List<Pay> getSalaryByMgr(String mgr)throws Throwable;
+    List<PayVO> getSalaryByMgr(String mgr)throws Throwable;
 
     /**
      * 根据经理返回该部门的全部员工
@@ -47,5 +47,5 @@ public interface MgrManage {
      * @param mgrName 经理名字
      * @param result 是否通过
      */
-    void check(int appid, String mgrName, boolean result);
+    void check(int appid, String mgrName, boolean result) throws Throwable;
 }

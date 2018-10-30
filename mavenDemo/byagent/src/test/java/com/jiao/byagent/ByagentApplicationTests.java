@@ -2,13 +2,10 @@ package com.jiao.byagent;
 
 
 import com.jiao.byagent.dao.*;
-import com.jiao.byagent.pojo.MgrEmp;
-import com.jiao.byagent.pojo.MgrEmp3;
-import com.jiao.byagent.pojo.MgrVO;
-import com.jiao.byagent.pojo.PayVO;
+import com.jiao.byagent.pojo.*;
 import com.jiao.byagent.service.EmpManage;
 import com.jiao.byagent.service.IUserDao;
-import com.jiao.byagent.service.serviceimpl.EmpImpl;
+import com.jiao.byagent.service.MgrManage;
 import com.jiao.proxy.pojo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -99,30 +96,13 @@ public class ByagentApplicationTests {
 	}
 
 	@Test
-	public void contextLoads7() {
-		System.out.println(dataSource.getClass());
-	}
-
-
-	@Test
-	public void contextLoads8() throws Throwable{
+	public void contextLoads9() throws Throwable{
 		AttendDaoMapper attendDaoMapper = (AttendDaoMapper) applicationContext.getBean("attendDaoMapper");
 		Emp emp = new Emp();
 		emp.setEmpId(1);
-		Type type = new Type();
-		type.setTypeId(1);
-		List<Attend> byEmpAndDutyday = attendDaoMapper.findByEmpUnAttend(emp,type);
-
+		List<AttendVo> attendsByEmp = attendDaoMapper.findAttendsByEmp(emp, "2018-10");
 	}
 
-	@Test
-	public void contextLoads9() throws Throwable{
-		AppDaoMapper appDaoMapper = (AppDaoMapper) applicationContext.getBean("appDaoMapper");
-		Emp emp = new Emp();
-		emp.setEmpId(1);
-		List<App> byEmpAndDutyday = appDaoMapper.findByEmp(emp);
-
-	}
 	@Test
 	public void contextLoads10() throws Throwable{
 		EmpDapMapper empDapMapper = (EmpDapMapper) applicationContext.getBean("empDapMapper");
@@ -173,7 +153,13 @@ public class ByagentApplicationTests {
     @Test
     public void contextLoads15() throws Throwable{
         EmpManage empImpl = (EmpManage) applicationContext.getBean("empImpl");
-        empImpl.autoPunch();
+        empImpl.punch("oracle","2018-10-25",true);
 
     }
+
+	@Test
+	public void contextLoads16() throws Throwable{
+		MgrManage mgrImpl = (MgrManage) applicationContext.getBean("mgrImpl");
+		List<PayVO> oracle = mgrImpl.getSalaryByMgr("oracle");
+	}
 }

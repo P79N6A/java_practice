@@ -2,9 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiao.byagent.dao.AttendDaoMapper">
+    <sql id="by_emp_empId">
+          <if test="emp != null">
+              <if test="emp.empId != null">
+                  AND  attend.emp_id =  #{emp.empId}
+              </if>
+          </if>
+    </sql>
+
+    <resultMap id="AttendVoMap" type="com.jiao.byagent.pojo.AttendVo">
+        <id property="attendId" column="attend_id"/>
+        <result property="dutyDay" column="duty_day"></result>
+        <result property="punchTime" column="punch_time"></result>
+        <result property="isCome" column="is_come"></result>
+        <result property="typeId" column="type_id"></result>
+        <result property="empId" column="emp_id"></result>
+        <!--关联映射-->
+        <association property="type"  javaType="com.jiao.proxy.pojo.Type">
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="type_name"></result>
+            <result property="amerceAmount" column="amerce_amount"></result>
+        </association>
+    </resultMap>
+
+
+
 
     <!--根据需求调整缓存参数：-->
-    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
 
     <select id="findByEmpAndDutyday"  resultType="Attend">
    SELECT * FROM `attend_table` AS attend WHERE attend.emp_id = #{emp.empId} AND attend.duty_day = #{dutyday}
@@ -15,12 +40,19 @@
     </select>
 
 
-    <select id="findByEmpUnAttend"  resultType="Attend">
-        SELECT * FROM `attend_table` WHERE duty_day >= DATE_FORMAT(NOW(), '%Y-%m-%d')-INTERVAL 3 DAY AND attend_table.emp_id = #{emp.empId} AND attend_table.type_id != #{type.typeId}
+    <select id="findByEmpUnAttend"  resultMap="AttendVoMap">
+        SELECT * FROM `attend_table` AS  attend , type_table as type WHERE attend.duty_day >= DATE_FORMAT(NOW(), '%Y-%m-%d')-INTERVAL 3 DAY AND attend.emp_id = #{emp.empId} AND attend.type_id != #{type.typeId} and attend.type_id = type.type_id
     </select>
 
 
-    <select id="findPerfbByEmp"  resultType="int">
+    <select id="findAttendsByEmp" resultMap="AttendVoMap">
+     SELECT *,typetable.type_id AS typeId FROM attend_table AS attend ,type_table AS typetable
+      <where>
+        <include refid="by_emp_empId"></include>
+          AND duty_day LIKE '%${payMonth}%' AND attend.type_id = typetable.type_id
+      </where>
+
+
 
     </select>
 

@@ -1,6 +1,6 @@
 package com.jiao.byagent.service;
 
-import com.jiao.proxy.pojo.Attend;
+import com.jiao.byagent.pojo.AttendVo;
 import com.jiao.proxy.pojo.Pay;
 import com.jiao.proxy.pojo.Type;
 
@@ -44,7 +44,7 @@ public interface EmpManage {
     public static final int LATE_LIMIT = 11;
     //以下午18点之后算正常下班
     public static final int LEAVE_LIMIT = 18;
-    //以上午16~18点之间算迟到
+    //以上午16~18点之间算早退
     public static final int EARLY_LIMIT = 16;
 
 
@@ -98,7 +98,7 @@ public interface EmpManage {
      * @param empName 员工名
      * @return 该员工的最近三天的非正常打卡
      */
-    List<Attend> unAttend(String empName) throws Throwable;
+    List<AttendVo> unAttend(String empName) throws Throwable;
 
     /**
      * 返回全部的出勤类别

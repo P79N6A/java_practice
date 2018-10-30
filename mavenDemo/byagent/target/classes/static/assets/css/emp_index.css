@@ -1,0 +1,4 @@
+div>ul>li:active{
+    border-radius: 5%;
+    background-color: #0275d8;
+}

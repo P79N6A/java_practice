@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiao.byagent.dao.CheckDaoMapper">
+    <select id="findUncheckedAppByMgr" parameterType="String" resultType="com.jiao.proxy.pojo.App">
+    SELECT * FROM app_table AS app,`check_table` AS check_ , emp_table AS emp  WHERE check_result IS NULL AND check_.mgr_id = emp.emp_id AND emp.emp_name = #{name}  AND app.app_id = check_.check_id
+    </select>
+
+
+</mapper>

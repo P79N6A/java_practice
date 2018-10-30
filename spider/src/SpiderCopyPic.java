@@ -16,12 +16,14 @@ public class SpiderCopyPic  {
         String line = null;
 
         String reg = "(C:\\\\Users\\\\jiao\\\\AppData\\\\Local).+[.jpg|.gif]";
+//        String reg = "https://img-blog.+SouthEast";
         Pattern pattern = Pattern.compile(reg);
         while( (line = bufferedReader.readLine()) != null){
             Matcher matcher = pattern.matcher(line);
             while(matcher.find()){
                 String path = matcher.group();
-                String targetFile = "E:\\gitrepo\\mybatis-only\\mybatis第一天\\pic"+path.substring(path.lastIndexOf("\\"));
+//                String targetFile = "E:\\gitrepo\\mybatis-only\\mybatisNotes\\pic2"+ UUID.randomUUID()+".jpg";
+                String targetFile = "E:\\gitrepo\\other\\shiro02\\pic"+ path.substring(path.lastIndexOf("\\"));
                 System.out.println(targetFile);
                 PicCopy picCopy = new PicCopy(path, targetFile);
                 picCopy.download();

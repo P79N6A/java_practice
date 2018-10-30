@@ -28,4 +28,9 @@ public interface MgrDaoMapper extends Mapper<Mgr> {
     MgrVO findByName(String name) throws Throwable;
 
 
+
+
+
+
+
 }
