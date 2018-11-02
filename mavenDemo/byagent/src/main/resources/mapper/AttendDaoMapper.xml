@@ -56,5 +56,12 @@
 
     </select>
 
+    <select id="findById"  resultType="Attend">
+       SELECT * from attend_table WHERE attend_table.attend_id = #{attend_id}
+    </select>
+
+    <delete id="deleteByEmps" parameterType="java.lang.Integer">
+        delete FROM attend_table WHERE emp_id = #{id}
+    </delete>
 
 </mapper>

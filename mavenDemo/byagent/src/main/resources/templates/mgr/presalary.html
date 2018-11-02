@@ -25,9 +25,26 @@
     <![endif]-->
 </head>
 <body>
-<div th:replace="~{mgr/index :: header}"></div>
-<h1>查看上月部门发薪</h1>
+<div class="container">
+    <div th:replace="~{mgr/index :: header}"></div>
+    <table class="table">
+        <caption style="text-align: center">查看上月部门发薪</caption>
+        <thead>
+        <tr >
+            <th>员工</th>
+            <th>薪资</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m:${pays}">
+            <td th:text="${m.emp.empName}"/>
+            <td th:text="${m.payAmount}"/>
 
+        </tr>
+        </tbody>
+    </table>
+
+</div>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 

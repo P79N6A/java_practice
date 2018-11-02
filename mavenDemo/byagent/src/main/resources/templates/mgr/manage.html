@@ -22,14 +22,46 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
+
     <![endif]-->
 </head>
 <body>
+<div class="container">
 <div th:replace="~{mgr/index :: header}"></div>
-<h1>管理部门员工</h1>
+    <table class="table">
+        <caption style="text-align: center">查看部门所有员工</caption>
+        <thead>
+        <tr >
+            <th>员工名</th>
+            <th>密码</th>
+            <th>工资</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${emps}">
+            <td th:text="${m.empName}"/>
+            <td th:text="${m.empPass}"/>
+            <td th:text="${m.empSalary}"/>
+            <td>
+                <a th:href="@{/mgr/addemp?id=}+${m.empId}">编辑</a>
+                <button th:attr="del_uri=@{/mgr/delete/}+${m.empId}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form id="deleteEmpForm"  method="post">
 
+    </form>
+</div>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
-
+<script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    $(".deleteBtn").click(function(){
+        //删除当前员工的
+        $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
+        return false;
+    });
+</script>
 </body>
 </html>

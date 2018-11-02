@@ -259,14 +259,38 @@ public class EmpImpl implements EmpManage {
     */ 
     @Override
     public boolean addApplication(int attId, int typeId, String reason) {
-        App app = new App();
-        app.setAttendId(attId);
-        app.setTypeId(typeId);
-        app.setAppReason(reason);
-        int insert = appDaoMapper.insert(app);
+        Condition condition = new Condition(App.class);
+        Example.Criteria criteria = condition.createCriteria();
+        criteria.andEqualTo("attendId", attId);
+        condition.and(criteria);
+        List<App> apps = appDaoMapper.selectByCondition(condition);
+        int insert =0 ;
+        App app ;
+        if (apps.size() == 0){
+            app = new App();
+            app.setAttendId(attId);
+            app.setTypeId(typeId);
+            app.setAppReason(reason);
+            insert = appDaoMapper.insert(app);
+        }else {
+            app = apps.get(0);
+            app.setTypeId(typeId);
+            app.setAppReason(reason);
+            insert = appDaoMapper.updateByPrimaryKeySelective(app);
+        }
         if (insert>0)
             return true;
         else
             return false;
+    }
+    /**
+     * @Description: 根据id查员工
+     * @Param:
+     * @return:
+     * @Author: Mr.Jiao
+     * @Date: 2018/10/31
+     */
+    public Emp findEmpByEmpId(int id) throws Throwable{
+        return empDapMapper.selectByPrimaryKey(id);
     }
 }

@@ -162,4 +162,19 @@ public class ByagentApplicationTests {
 		MgrManage mgrImpl = (MgrManage) applicationContext.getBean("mgrImpl");
 		List<PayVO> oracle = mgrImpl.getSalaryByMgr("oracle");
 	}
+
+
+	@Test
+	public void contextLoads17() throws Throwable{
+		AttendDaoMapper attendDaoMapper = (AttendDaoMapper) applicationContext.getBean("attendDaoMapper");
+		Attend byId = attendDaoMapper.findById(14);
+		System.out.println(byId.toString());
+	}
+
+	@Test
+	public void contextLoads18() throws Throwable{
+		AppDaoMapper appDaoMapper = (AppDaoMapper) applicationContext.getBean("appDaoMapper");
+		List<AppVo> oracle = appDaoMapper.findByMgr(1);
+
+	}
 }

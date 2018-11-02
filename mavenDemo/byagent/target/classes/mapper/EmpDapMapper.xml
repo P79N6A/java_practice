@@ -16,6 +16,6 @@
     </select>
 
     <select id="findByMgr" parameterType="Mgr" resultType="Emp">
-        select * from emp_table WHERE emp_table.mgr_id = #{mgrId}
+        select * from emp_table WHERE emp_table.mgr_id = #{mgrId} AND emp_table.emp_status = true
     </select>
 </mapper>

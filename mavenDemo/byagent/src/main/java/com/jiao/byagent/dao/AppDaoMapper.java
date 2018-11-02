@@ -1,6 +1,7 @@
 package com.jiao.byagent.dao;
 
 import com.jiao.byagent.base.Mapper;
+import com.jiao.byagent.pojo.AppVo;
 import com.jiao.proxy.pojo.App;
 import com.jiao.proxy.pojo.Emp;
 
@@ -20,6 +21,15 @@ public interface AppDaoMapper extends Mapper<App> {
     List<App> findByEmp(Emp emp) throws Throwable;
 
 
+    /**
+    * @Description: 根据经理查询所有的申请
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/31
+    */
+    List<AppVo> findByMgr(int mgr_id) throws Throwable;
 
 
- }
+
+}

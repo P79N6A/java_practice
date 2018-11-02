@@ -31,19 +31,19 @@ public class ServletConfigure {
         WebMvcConfigurerAdapter adapter = new WebMvcConfigurerAdapter() {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
-                registry.addViewController("/").setViewName("/signin/index");
-                registry.addViewController("/login").setViewName("/signin/index");
+                registry.addViewController("/").setViewName("signin/index");
+                registry.addViewController("/login").setViewName("signin/index");
 //                registry.addViewController("/index.html").setViewName("login");
 //                registry.addViewController("/main.html").setViewName("dashboard");
-                registry.addViewController("/emp/punch").setViewName("/emp/punch");
-                registry.addViewController("/emp/attend").setViewName("/emp/attend");
-                registry.addViewController("/emp/salary").setViewName("/emp/salary");
-                registry.addViewController("/mgr/reapp").setViewName("/mgr/reapp");
-                registry.addViewController("/mgr/manage").setViewName("/mgr/manage");
-                registry.addViewController("/mgr/add").setViewName("/mgr/add");
-                registry.addViewController("/mgr/presalary").setViewName("/mgr/presalary");
-                registry.addViewController("/mgr/punch").setViewName("/mgr/punch");
-                registry.addViewController("/mgr/salary").setViewName("/mgr/salary");
+                registry.addViewController("/emp/punch").setViewName("emp/punch");
+                registry.addViewController("/emp/attend").setViewName("emp/attend");
+                registry.addViewController("/emp/salary").setViewName("emp/salary");
+                registry.addViewController("/mgr/reapp").setViewName("mgr/reapp");
+                registry.addViewController("/mgr/manage").setViewName("mgr/manage");
+                registry.addViewController("/mgr/add").setViewName("mgr/add");
+                registry.addViewController("/mgr/presalary").setViewName("mgr/presalary");
+                registry.addViewController("/mgr/punch").setViewName("mgr/punch");
+                registry.addViewController("/mgr/salary").setViewName("mgr/salary");
             }
 
             //注册拦截器
@@ -54,8 +54,8 @@ public class ServletConfigure {
                 //SpringBoot已经做好了静态资源映射
 //                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
 //              .excludePathPatterns("/index.html","/","/user/login","/login","/signin/index.html","/signin/index","/shouye");
-   registry.addInterceptor(new EmpInterceptor()).addPathPatterns("/emp/**");
-   registry.addInterceptor(new MgrInterceptor()).addPathPatterns("/mgr/**");
+   registry.addInterceptor(new EmpInterceptor()).addPathPatterns("emp/**");
+   registry.addInterceptor(new MgrInterceptor()).addPathPatterns("mgr/**");
             }
         };
         return adapter;

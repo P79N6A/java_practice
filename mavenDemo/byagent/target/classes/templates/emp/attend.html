@@ -41,9 +41,13 @@
             <td th:text="${m.dutyDay}"/>
             <td th:text="${m.type.typeName}"/>
             <td th:text="${m.punchTime}"/>
+            <td><a href="#" th:href="@{/emp/addApplication?id=}+${m.attendId}">申请</a></td>
         </tr>
         </tbody>
     </table>
+
+
+
 </div>
 
 

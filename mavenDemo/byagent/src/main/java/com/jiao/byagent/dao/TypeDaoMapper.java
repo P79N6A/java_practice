@@ -8,4 +8,5 @@ import com.jiao.proxy.pojo.Type;
  */
 
 public interface TypeDaoMapper extends Mapper<Type> {
+
 }

@@ -25,8 +25,22 @@
     <![endif]-->
 </head>
 <body>
+<div class="container">
 <div th:replace="~{mgr/index :: header}"></div>
-<h1>新增员工</h1>
+<form class="form-signin" action="login.html" th:action="@{/mgr/editEmp}" method="post">
+    <h2 class="form-signin-heading">修改员工</h2>
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+    <input type="text" name="empName" th:value="${emp!=null}?${emp.empName}"  id="name" class="form-control" placeholder="名称" required autofocus>
+    <input type="text" name="empPass" th:value="${emp!=null}?${emp.empPass}" id="pass" class="form-control" placeholder="密码" required>
+    <input type="text" name="empSalary" th:value="${emp!=null}?${emp.empSalary}"  id="salary" class="form-control" placeholder="薪资" required>
+
+
+    <div class="row">
+        <div class="col-md-6"><button class="btn btn-lg btn-primary btn-block" type="submit">提交</button></div>
+        <div class="col-md-6"><button class="btn btn-lg btn-primary btn-block" type="reset">重新输入</button></div>
+    </div>
+</form>
+</div>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>

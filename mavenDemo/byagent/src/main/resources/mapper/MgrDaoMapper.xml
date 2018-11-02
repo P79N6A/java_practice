@@ -30,4 +30,9 @@ SELECT * , mgr_table.`mgr_id` AS mgrId FROM emp_table , mgr_table WHERE emp_tabl
     <select id="findByName"  resultMap="studentResultMap">
         SELECT * , mgr_table.`mgr_id` AS mgrId FROM emp_table , mgr_table WHERE emp_table.emp_name = "oracle"  AND emp_table.mgr_id IS NULL AND emp_table.emp_id = mgr_table.mgr_id
     </select>
+
+
+    <select id="findIdByName"  resultType="int">
+        SELECT emp_table.emp_id from emp_table WHERE emp_table.emp_name LIKE #{mgr}
+    </select>
 </mapper>

@@ -28,8 +28,14 @@ public interface MgrDaoMapper extends Mapper<Mgr> {
     MgrVO findByName(String name) throws Throwable;
 
 
-
-
+    /**
+    * @Description: 根据经理名查id
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/31
+    */
+    int findIdByName(String mgr) throws Throwable;
 
 
 

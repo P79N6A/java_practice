@@ -25,9 +25,25 @@
     <![endif]-->
 </head>
 <body>
+<div class="container">
 <div th:replace="~{mgr/index :: header}"></div>
-<h1>打卡</h1>
+<br>
+<div class="punchTitle fontCustom">电子打卡系统</div>
+<br><br>
+<div class="punchTitle fontCustom" style="color: red" th:text="${tip}" th:if="${not #strings.isEmpty(tip)}"></div>
 
+<form class="form-signin" th:if="${ (result eq 1)||(result eq  3)}" th:action="@{/mgr/employeeCome}" method="post">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">上班打卡</button>
+</form>
+
+<br><br><br><br>
+
+
+
+<form class="form-signin" th:if="${ (result eq  2)||(result eq 3)}" th:action="@{/mgr/employeeLeave}" method="post">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">下班打卡</button>
+</form>
+</div>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 

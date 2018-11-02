@@ -24,10 +24,31 @@
 
     <![endif]-->
 </head>
+<div class="container">
 <body>
 <div th:replace="~{mgr/index :: header}"></div>
-<h1>签核申请</h1>
-
+<table class="table">
+    <caption style="text-align: center">签核申请</caption>
+    <thead>
+    <tr >
+        <th>申请人</th>
+        <th>原考勤</th>
+        <th>申诉考勤</th>
+        <th>申请理由</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="m : ${apps}">
+        <td th:text="${m.attend.emp.empName}"/>
+        <td th:text="${m.attend.type.typeName}"/>
+        <td th:text="${m.type.typeId}"/>
+        <td th:text="${m.appReason}"/>
+        <td><a href="#" th:href="@{/mgr/doapp?result=1&id=}+${m.appId}">通过</a></td>
+        <td><a href="#" th:href="@{/mgr/doapp?result=0&id=}+${m.appId}">拒绝</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 

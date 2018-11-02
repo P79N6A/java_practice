@@ -18,4 +18,7 @@ public interface CheckDaoMapper extends Mapper<Check> {
     * @Date: 2018/10/25
     */
   List<App> findUncheckedAppByMgr(String name) throws Throwable;
+
+
+
 }

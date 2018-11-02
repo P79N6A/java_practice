@@ -1,7 +1,9 @@
 package com.jiao.byagent.service;
 
+import com.jiao.byagent.pojo.AppVo;
 import com.jiao.byagent.pojo.PayVO;
 import com.jiao.proxy.pojo.App;
+import com.jiao.proxy.pojo.Check;
 import com.jiao.proxy.pojo.Emp;
 
 import java.util.List;
@@ -48,4 +50,44 @@ public interface MgrManage {
      * @param result 是否通过
      */
     void check(int appid, String mgrName, boolean result) throws Throwable;
+
+    /**
+    * @Description: 根据经理名查id
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/31
+    */
+    int findId(String mgr) throws Throwable;
+
+
+    /**
+    * @Description: 根据经理id查该部门的所有申请
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/31
+    */
+    List<AppVo> findByMgrId(int id) throws Throwable;
+
+
+
+    /**
+     * @Description: 根据appid查找批复
+     * @Param:
+     * @return:
+     * @Author: Mr.Jiao
+     * @Date: 2018/10/31
+     */
+
+    Check findCheckByid(int appid) throws Throwable;
+
+    /**
+    * @Description: 根据id删除员工
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/11/1
+    */
+    void deleteById(int id)throws Throwable;
 }

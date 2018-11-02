@@ -10,6 +10,35 @@
 SELECT * FROM `app_table` AS app , `attend_table` AS attend ,`emp_table` AS emp WHERE app.attend_id = attend.attend_id AND attend.emp_id = emp.`emp_id`AND emp.`emp_id` = #{empId}
     </select>
 
+    <resultMap id="appVoMap" type="com.jiao.byagent.pojo.AppVo">
+        <id column="app_id" property="appId"/>
+        <result column="attend_id" property="attendId"></result>
+        <result column="app_reason" property="appReason"></result>
+        <result column="app_result" property="appResult"></result>
+        <result column="type_id" property="typeId"></result>
+        <association property="type" column="type_id" select="com.jiao.byagent.dao.TypeDaoMapper.selectByIds"/>
+        <!--关联映射-->
+        <association property="attend"  javaType="com.jiao.byagent.pojo.AttendVo">
+            <id property="attendId" column="attend_id"/>
+            <result property="dutyDay" column="duty_day"></result>
+            <result property="punchTime" column="punch_time"></result>
+            <result property="isCome" column="is_come"></result>
+            <result property="typeId" column="type_id"></result>
+            <result property="empId" column="emp_id"></result>
+            <association property="type" column="type_id" select="com.jiao.byagent.dao.TypeDaoMapper.selectByIds"/>
+            <association property="emp" column="emp_id" select="com.jiao.byagent.dao.EmpDapMapper.selectByIds"/>
+        </association>
+    </resultMap>
+
+
+
+
+
+    <select id="findByMgr"  resultMap="appVoMap">
+SELECT * FROM attend_table, app_table WHERE app_table.`attend_id`= attend_table.`attend_id` AND  attend_table.`emp_id` IN (SELECT emp_id FROM `emp_table` WHERE emp_table.`mgr_id` = #{mgr}) AND app_table.app_result = NULL
+    </select>
+
+
 
 
 </mapper>

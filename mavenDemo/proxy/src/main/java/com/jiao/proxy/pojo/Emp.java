@@ -17,6 +17,16 @@ public class Emp  implements Serializable{
 
     private Integer mgrId;
 
+    private boolean empStatus;
+
+    public boolean isEmpStatus() {
+        return empStatus;
+    }
+
+    public void setEmpStatus(boolean empStatus) {
+        this.empStatus = empStatus;
+    }
+
     public Integer getEmpId() {
         return empId;
     }

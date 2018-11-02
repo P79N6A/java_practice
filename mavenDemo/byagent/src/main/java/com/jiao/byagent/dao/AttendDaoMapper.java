@@ -50,4 +50,24 @@ public interface AttendDaoMapper extends Mapper<Attend> {
       */
 
        List<AttendVo> findAttendsByEmp(@Param("emp") Emp emp , @Param("payMonth") String payMonth)throws Throwable;
+
+
+     /**
+     * @Description: 根据attend_id查找attend
+     * @Param:
+     * @return:
+     * @Author: Mr.Jiao
+     * @Date: 2018/10/31
+     */
+      Attend findById(int attend_id) throws Throwable;
+
+
+      /**
+      * @Description: 根据empId删除员工记录
+      * @Param:
+      * @return:
+      * @Author: Mr.Jiao
+      * @Date: 2018/11/1
+      */
+      int deleteByEmps(int id)throws  Throwable;
 }

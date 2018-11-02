@@ -27,12 +27,12 @@
   <body>
 <div class="container">
   <nav>
-    <ul class="nav nav-pills" th:fragment="header">
-      <li role="presentation"><a href="#" th:href="@{/mgr/punch}">打卡</a></li>
-      <li role="presentation"><a href="#" th:href="@{/mgr/salary}">查看历史工资</a></li>
+    <ul class="nav nav-pills mgr" th:fragment="header">
+      <li role="presentation"><a href="#" th:href="@{/mgr/employeePunch}">打卡</a></li>
+      <li role="presentation"><a href="#" th:href="@{/mgr/empsalary}">查看历史工资</a></li>
       <li role="presentation"><a href="#" th:href="@{/mgr/reapp}">签核申请</a></li>
       <li role="presentation"><a href="#" th:href="@{/mgr/manage}">管理部门员工</a></li>
-      <li role="presentation"><a href="#" th:href="@{/mgr/add}">新增员工</a></li>
+      <li role="presentation"><a href="#" th:href="@{/mgr/addemp}">新增员工</a></li>
       <li role="presentation"><a href="#" th:href="@{/mgr/presalary}">查看上月部门发薪</a></li>
       <li role="presentation"><a href="#" th:href="@{/logout}">退出系统</a></li>
     </ul>

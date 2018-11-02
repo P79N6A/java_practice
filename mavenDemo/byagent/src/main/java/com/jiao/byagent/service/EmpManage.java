@@ -1,6 +1,7 @@
 package com.jiao.byagent.service;
 
 import com.jiao.byagent.pojo.AttendVo;
+import com.jiao.proxy.pojo.Emp;
 import com.jiao.proxy.pojo.Pay;
 import com.jiao.proxy.pojo.Type;
 
@@ -114,4 +115,13 @@ public interface EmpManage {
      * @return 添加的结果
      */
     boolean addApplication(int attId , int typeId , String reason) throws Throwable;
+
+    /**
+    * @Description: 根据id查员工
+    * @Param:
+    * @return:
+    * @Author: Mr.Jiao
+    * @Date: 2018/10/31
+    */
+    Emp findEmpByEmpId(int id) throws Throwable;
 }
