@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="byagent" />
+        <module name="mybatis-generator" />
         <module name="proxy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="byagent" target="1.8" />
       <module name="mavenDemo" target="1.8" />
+      <module name="mybatis-generator" target="1.8" />
       <module name="proxy" target="1.8" />
     </bytecodeTargetLevel>
   </component>

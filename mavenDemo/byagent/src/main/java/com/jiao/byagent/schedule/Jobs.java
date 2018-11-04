@@ -13,12 +13,13 @@ public class Jobs {
     @Autowired
     EmpManage empImpl;
 
-    @Scheduled(cron="0 0 0 1 * ? ")
+    //@Scheduled(fixedRate = 5000)
+    @Scheduled(cron="0 0 7 * * ?")
     public void autoPunch() throws Throwable {
         empImpl.autoPunch();
     }
 
-    @Scheduled(cron="0 15 3 * * ?")
+    @Scheduled(cron="0 15 10 15 * ?")
     public void autoPay() throws Throwable {
        empImpl.autoPay();
     }
