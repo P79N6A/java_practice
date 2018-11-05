@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/byagent/byagent.iml" filepath="$PROJECT_DIR$/byagent/byagent.iml" />
       <module fileurl="file://$PROJECT_DIR$/mavenDemo.iml" filepath="$PROJECT_DIR$/mavenDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatisgenerator/mybatis-generator.iml" filepath="$PROJECT_DIR$/mybatisgenerator/mybatis-generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy/proxy.iml" filepath="$PROJECT_DIR$/proxy/proxy.iml" />
     </modules>
   </component>
