@@ -1,0 +1,1 @@
+参考聚合工程mavenDemo的子工程proxy   实现了aop代理记录日志

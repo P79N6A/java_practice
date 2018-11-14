@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/e3managerinterface/e3managerinterface.iml" filepath="$PROJECT_DIR$/e3managerinterface/e3managerinterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/e3managerpojo/e3managerpojo.iml" filepath="$PROJECT_DIR$/e3managerpojo/e3managerpojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/e3managerservice/e3managerservice.iml" filepath="$PROJECT_DIR$/e3managerservice/e3managerservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/e3managerweb/e3managerweb.iml" filepath="$PROJECT_DIR$/e3managerweb/e3managerweb.iml" />
       <module fileurl="file://$PROJECT_DIR$/manage.iml" filepath="$PROJECT_DIR$/manage.iml" />
     </modules>
   </component>

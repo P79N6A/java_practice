@@ -1,0 +1,11 @@
+com\jiao\mapper\TbUserMapper.class
+com\jiao\mapper\TbOrderItemMapper.class
+com\jiao\mapper\TbOrderShippingMapper.class
+com\jiao\mapper\TbContentCategoryMapper.class
+com\jiao\mapper\TbOrderMapper.class
+com\jiao\mapper\TbItemMapper.class
+com\jiao\mapper\TbItemParamItemMapper.class
+com\jiao\mapper\TbItemCatMapper.class
+com\jiao\mapper\TbItemParamMapper.class
+com\jiao\mapper\TbContentMapper.class
+com\jiao\mapper\TbItemDescMapper.class
