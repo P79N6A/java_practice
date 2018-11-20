@@ -68,6 +68,12 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
+        <!-- 加入jedis -->
+        <!-- Redis客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

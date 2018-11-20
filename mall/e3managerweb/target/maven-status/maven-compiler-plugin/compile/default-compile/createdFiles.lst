@@ -1,2 +1,4 @@
+com\jiao\controller\SolrController.class
 com\jiao\controller\ItemController.class
+com\jiao\controller\PageController.class
 com\jiao\controller\ContentCatController.class
