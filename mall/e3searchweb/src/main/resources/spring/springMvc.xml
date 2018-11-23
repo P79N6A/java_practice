@@ -27,7 +27,7 @@
     <dubbo:application name="e3-portal-web"/>
     <dubbo:registry protocol="zookeeper" address="192.168.8.45:2181"/>
 
-    <dubbo:reference interface=" com.jiao.research.SearchItems" id="searchItems" />
+    <dubbo:reference interface=" com.jiao.research.SearchItems" id="searchItems"   version="1.0.0"/>
     <!--<dubbo:reference interface="com.jiao.content.service.ContentService" id="contentService" />-->
     <!--<dubbo:reference interface="com.jiao.service.ItemCatService" id="itemCatService" />-->
     <!--<dubbo:reference interface="com.jiao.service.ItemDesc" id="itemDesc" />-->
