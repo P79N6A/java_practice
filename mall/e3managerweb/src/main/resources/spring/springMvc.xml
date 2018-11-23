@@ -24,7 +24,7 @@
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="e3-manager-web"/>
-    <dubbo:registry protocol="zookeeper" address="198.181.36.236:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.8.45:2181"/>
     <dubbo:reference interface="com.jiao.service.ItemService" id="itemService" />
     <dubbo:reference interface="com.jiao.service.ItemCatService" id="itemCatService" />
     <dubbo:reference interface="com.jiao.service.ItemDesc" id="itemDesc" />

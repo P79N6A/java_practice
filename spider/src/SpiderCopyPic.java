@@ -23,7 +23,7 @@ public class SpiderCopyPic  {
             while(matcher.find()){
                 String path = matcher.group();
 //                String targetFile = "E:\\gitrepo\\mybatis-only\\mybatisNotes\\pic2"+ UUID.randomUUID()+".jpg";
-                String targetFile = "E:\\gitrepo\\other\\shiro02\\pic"+ path.substring(path.lastIndexOf("\\"));
+                String targetFile = "E:\\gitrepo\\linux-practice\\搭建zookeeper和solr集群\\img"+ path.substring(path.lastIndexOf("\\"));
                 System.out.println(targetFile);
                 PicCopy picCopy = new PicCopy(path, targetFile);
                 picCopy.download();

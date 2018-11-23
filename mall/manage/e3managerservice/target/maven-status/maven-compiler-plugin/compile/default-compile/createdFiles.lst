@@ -1,4 +1,5 @@
 com\jiao\service\impl\ItemServiceImpl.class
+com\jiao\service\impl\ItemParamItemServiceImpl.class
+com\jiao\service\impl\ItemServiceImpl$1.class
 com\jiao\service\impl\ItemDescImpl.class
 com\jiao\service\impl\ItemCatServiceImpl.class
-com\jiao\service\impl\ItemParamItemServiceImpl.class

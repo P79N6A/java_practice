@@ -9,4 +9,7 @@ import java.util.List;
  */
 public interface SolrSearchMapper {
     List<SolrResult> getItemInfo();
+
+    SolrResult getItemById(long id);
+
 }

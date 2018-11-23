@@ -1,9 +1,11 @@
 package com.jiao.common.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by jiao on 11/20/2018.
  */
-public class SolrResult {
+public class SolrResult  implements Serializable{
     private String id;
     private String title;
     private long price;
@@ -60,4 +62,10 @@ public class SolrResult {
     }
 
 
+    public String[] getImages(){
+        if (image!=null &&!"".equals(image)){
+            return image.split(",");
+        }
+        return null;
+    }
 }

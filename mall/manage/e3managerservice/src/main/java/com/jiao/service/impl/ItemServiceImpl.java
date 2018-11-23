@@ -1,5 +1,6 @@
 package com.jiao.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiao.common.pojo.DataGridResult;
@@ -12,8 +13,12 @@ import com.jiao.pojo.TbItemDesc;
 import com.jiao.pojo.TbItemExample;
 import com.jiao.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +34,11 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private TbItemDescMapper tbItemDescMapper;
 
+    @Autowired
+    JmsTemplate jmsTemplate;
+
+    @Resource
+    Destination topicDestination;
 
     @Override
     public TbItem getItemById(long id) {
@@ -52,7 +62,7 @@ public class ItemServiceImpl implements ItemService {
 
     public TaotaoResult addItem(TbItem tbItem, String desc){
         // 生成id
-        long l = IDUtils.genItemId();
+        final long l = IDUtils.genItemId();
         tbItem.setId(l);
         // 商品状态，1-正常，2-下架，3-删除
         tbItem.setStatus((byte)1);
@@ -70,6 +80,17 @@ public class ItemServiceImpl implements ItemService {
         tbItemDesc.setItemId(l);
         tbItemDesc.setUpdated(new Date());
         tbItemDescMapper.insert(tbItemDesc);
+        //使用JmsTemplate对象发送消息。
+        jmsTemplate.send(topicDestination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                //创建一个消息对象并返回
+                TextMessage textMessage = session.createTextMessage(l+"");
+                return textMessage;
+            }
+
+    });
+
         return TaotaoResult.ok();
     }
 

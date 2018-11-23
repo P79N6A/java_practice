@@ -77,6 +77,7 @@ public class ItemController {
             // 获取文件原扩展名
             String originalFilename = uploadFile.getOriginalFilename();
             String extname = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+
             String s = fastDFSClient.uploadFile(uploadFile.getBytes(), extname);
             // 拼接图片地址
             String url =  IMAGE_SERVER_URL+s;
@@ -106,7 +107,7 @@ public class ItemController {
     @RequestMapping("/item/save")
     @ResponseBody
     public TaotaoResult addItem(TbItem tbItem, String desc){
-     return  itemService.addItem(tbItem,desc);
+        return  itemService.addItem(tbItem,desc);
     }
 
     /**

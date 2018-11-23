@@ -25,7 +25,7 @@
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="e3-portal-web"/>
-    <dubbo:registry protocol="zookeeper" address="198.181.36.236:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.8.45:2181"/>
     <dubbo:reference interface="com.jiao.content.service.ContentCatgoryService" id="contentCatgoryService" />
     <dubbo:reference interface="com.jiao.content.service.ContentService" id="contentService" />
     <!--<dubbo:reference interface="com.jiao.service.ItemCatService" id="itemCatService" />-->
