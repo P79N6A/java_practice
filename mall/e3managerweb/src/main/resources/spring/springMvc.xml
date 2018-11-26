@@ -25,6 +25,7 @@
     <!-- 引用dubbo服务 -->
     <dubbo:application name="e3-manager-web"/>
     <dubbo:registry protocol="zookeeper" address="192.168.8.45:2181"/>
+<<<<<<< HEAD
     <dubbo:reference interface="com.jiao.service.ItemService" id="itemService"  version="1.0.0"/>
     <dubbo:reference interface="com.jiao.service.ItemCatService" id="itemCatService"  version="1.0.0" />
     <dubbo:reference interface="com.jiao.service.ItemDesc" id="itemDesc"   version="1.0.0"/>
@@ -32,6 +33,15 @@
     <dubbo:reference interface="com.jiao.content.service.ContentCatgoryService" id="contentCatgoryService"  version="1.0.0"/>
     <dubbo:reference interface="com.jiao.content.service.ContentService" id="contentService"  version="1.0.0"/>
     <dubbo:reference interface="com.jiao.research.GetSolrResult" id="getSolrResult"  version="1.0.0" />
+=======
+    <dubbo:reference interface="com.jiao.service.ItemService" id="itemService" version="1.0.0"/>
+    <dubbo:reference interface="com.jiao.service.ItemCatService" id="itemCatService" version="1.0.0"/>
+    <dubbo:reference interface="com.jiao.service.ItemDesc" id="itemDesc" version="1.0.0"/>
+    <dubbo:reference interface="com.jiao.service.ItemParamItemService" id="itemParamItemService" version="1.0.0" />
+    <dubbo:reference interface="com.jiao.content.service.ContentCatgoryService" id="contentCatgoryService" version="1.0.0" />
+    <dubbo:reference interface="com.jiao.content.service.ContentService" id="contentService" version="1.0.0" />
+    <dubbo:reference interface="com.jiao.research.GetSolrResult" id="getSolrResult" version="1.0.0"/>
+>>>>>>> 6f4c1561295819fc8bd5197bcc64ca9851bcf653
     <!--对静态资源的映射-->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>

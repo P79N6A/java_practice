@@ -25,9 +25,8 @@ public class MyMessageListener implements MessageListener {
         try {
             Thread.sleep(100);
             TextMessage textMessage = (TextMessage)message;
-            String  id = textMessage.getText();
-            long i = Integer.parseInt(id);
-            SolrResult solrResult = solrSearchMapper.getItemById(i);
+            long itemId = Long.parseLong(textMessage.getText());
+            SolrResult solrResult = solrSearchMapper.getItemById(itemId);
             SolrInputDocument solrInputDocument = new SolrInputDocument();
             solrInputDocument.addField("id",solrResult.getId());
             solrInputDocument.addField("item_title",solrResult.getTitle());
