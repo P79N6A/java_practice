@@ -16,8 +16,13 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="364">
               <caret line="228" column="23" lean-forward="false" selection-start-line="228" selection-start-column="23" selection-end-line="228" selection-end-column="23" />
+=======
+            <state relative-caret-position="359">
+              <caret line="226" column="25" lean-forward="false" selection-start-line="222" selection-start-column="10" selection-end-line="226" selection-end-column="25" />
+>>>>>>> 7730f210e4b3a589f289eed2d7a2630a813ba538
               <folding />
             </state>
           </provider>
@@ -541,15 +546,20 @@
       <workItem from="1541755655432" duration="5447000" />
       <workItem from="1542243518934" duration="3681000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1542784082475" duration="2681000" />
       <workItem from="1542955692116" duration="853000" />
 =======
       <workItem from="1542784082475" duration="4621000" />
 >>>>>>> 6f4c1561295819fc8bd5197bcc64ca9851bcf653
+=======
+      <workItem from="1542784082475" duration="4647000" />
+>>>>>>> 7730f210e4b3a589f289eed2d7a2630a813ba538
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="24200000" />
 =======
@@ -558,6 +568,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1066" extended-state="1" />
+=======
+    <option name="totallyTimeSpent" value="25313000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+>>>>>>> 7730f210e4b3a589f289eed2d7a2630a813ba538
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -573,10 +589,14 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18494624" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
 =======
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18002136" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
 >>>>>>> 6f4c1561295819fc8bd5197bcc64ca9851bcf653
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18002136" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+>>>>>>> 7730f210e4b3a589f289eed2d7a2630a813ba538
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -662,8 +682,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state relative-caret-position="359">
+          <caret line="226" column="25" lean-forward="false" selection-start-line="222" selection-start-column="10" selection-end-line="226" selection-end-column="25" />
+>>>>>>> 7730f210e4b3a589f289eed2d7a2630a813ba538
           <folding />
         </state>
       </provider>

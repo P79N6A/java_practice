@@ -1,10 +1,14 @@
 package com.jiao.service.impl;
 
 
+import com.alibaba.druid.support.json.JSONUtils;
+import com.jiao.common.utils.JsonUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jiao.common.jedis.JedisClient;
 import com.jiao.common.pojo.DataGridResult;
 import com.jiao.common.utils.IDUtils;
+import com.jiao.common.utils.JsonUtils;
 import com.jiao.common.utils.TaotaoResult;
 import com.jiao.mapper.TbItemDescMapper;
 import com.jiao.mapper.TbItemMapper;
@@ -12,7 +16,9 @@ import com.jiao.pojo.TbItem;
 import com.jiao.pojo.TbItemDesc;
 import com.jiao.pojo.TbItemExample;
 import com.jiao.service.ItemService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
@@ -21,6 +27,9 @@ import javax.annotation.Resource;
 import javax.jms.*;
 import java.util.Date;
 import java.util.List;
+
+;
+;
 
 /**
  * Created by jiao on 2018/11/6.
@@ -40,10 +49,36 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     Destination topicDestination;
 
+    @Autowired
+    JedisClient jedisClient;
+
+    @Value("${REDIS_ITEM_PRE}")
+    private String REDIS_ITEM_PRE;
+
+    @Value("${ITEM_CACHE_EXPIRE}")
+    private int ITEM_CACHE_EXPIRE;
+
     @Override
     public TbItem getItemById(long id) {
-
-        return itemMapper.selectByPrimaryKey(id);
+        //查询缓存
+        try {
+            String json = jedisClient.get(REDIS_ITEM_PRE + ":" + id + ":BASE");
+            if(StringUtils.isNotBlank(json)) {
+                TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
+                return tbItem;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TbItem tbItem = itemMapper.selectByPrimaryKey(id);
+        //查询缓存
+        try {
+            String json = jedisClient.set(REDIS_ITEM_PRE + ":" + id + ":BASE", JsonUtils.objectToJson(tbItem));
+            jedisClient.expire(REDIS_ITEM_PRE + ":" + id + ":BASE",ITEM_CACHE_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  tbItem;
     }
 
 
