@@ -4,6 +4,7 @@ com\jiao\common\jedis\JedisClient.class
 com\jiao\common\pojo\SolrResult.class
 com\jiao\common\utils\JsonUtils.class
 com\jiao\common\utils\FastDFSClient.class
+com\jiao\common\utils\CookieUtils.class
 com\jiao\common\jedis\JedisClientCluster.class
 com\jiao\common\pojo\DataGridResult.class
 com\jiao\common\utils\IDUtils.class
