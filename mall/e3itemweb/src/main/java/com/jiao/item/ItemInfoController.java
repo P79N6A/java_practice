@@ -1,6 +1,7 @@
 package com.jiao.item;
 
 
+import com.jiao.pojo.Item;
 import com.jiao.pojo.TbItem;
 import com.jiao.pojo.TbItemDesc;
 import com.jiao.service.ItemDesc;
@@ -26,8 +27,9 @@ public class ItemInfoController {
     @RequestMapping("/item/{itemId}")
     public String itemDetails(@PathVariable long itemId, Model model){
         TbItem itemById = itemService.getItemById(itemId);
+        Item item = new Item(itemById);
         TbItemDesc itemDesc = this.itemDesc.getItemDesc(itemId);
-        model.addAttribute("item",itemById);
+        model.addAttribute("item",item);
         model.addAttribute("itemDesc",itemDesc);
         return "item";
     }
