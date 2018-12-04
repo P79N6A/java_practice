@@ -33,7 +33,11 @@ public class RegisterController {
 
 
     @RequestMapping("/page/{page}")
-    public String showRegister(@PathVariable String page) {
+    public String showRegister(@PathVariable String page ,String redirect,HttpServletRequest request) {
+        if (StringUtils.isNotBlank(redirect))
+        {
+            request.setAttribute("redirect" , redirect );
+        }
         return page;
     }
 

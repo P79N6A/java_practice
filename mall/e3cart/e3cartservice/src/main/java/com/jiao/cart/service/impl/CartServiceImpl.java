@@ -110,5 +110,12 @@ public class CartServiceImpl implements CartService{
         return TaotaoResult.ok();
     }
 
+    @Override
+    public TaotaoResult deleteCart(long userId) {
+         jedisClient.del( REDIS_CART_PRE + ":" + userId);
+
+        return TaotaoResult.ok();
+    }
+
 
 }

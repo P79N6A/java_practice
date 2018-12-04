@@ -26,4 +26,7 @@ public interface CartService {
 
    // 删除服务端商品
     TaotaoResult deleteNum(long userId , long itemId);
+
+   // 删除用户购物车
+   TaotaoResult deleteCart(long userId );
 }
