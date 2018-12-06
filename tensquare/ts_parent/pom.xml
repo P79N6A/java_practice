@@ -7,6 +7,10 @@
     <groupId>com.jiao</groupId>
     <artifactId>ts_parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>ts_common</module>
+        <module>ts_base</module>
+    </modules>
     <packaging>pom</packaging>
     <description>十次方</description>
 
