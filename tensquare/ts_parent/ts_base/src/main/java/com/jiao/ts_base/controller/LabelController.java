@@ -3,9 +3,11 @@ package com.jiao.ts_base.controller;
 import com.jiao.ts_base.pojo.Label;
 import com.jiao.ts_base.pojo.PageLabel;
 import com.jiao.ts_base.service.LabelService;
+import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -86,14 +88,16 @@ public class LabelController {
      */
     @RequestMapping(value = "/search/{page}/{size}",method = RequestMethod.POST)
     public Result findPage(@PathVariable int page , @PathVariable int size, @RequestBody PageLabel pageLabel){
-        return new Result(true, StatusCode.OK,"分页查询成功");
+        Page<Label> pages = labelService.findPage(pageLabel, page, size);
+        return new Result(true, StatusCode.OK,"分页查询成功",new PageResult<>(pages.getTotalElements(),pages.getContent()));
     }
     /**
      * 标签分页
      */
     @RequestMapping(value = "/search" , method = RequestMethod.POST)
     public Result fingPageNoCondition(@RequestBody PageLabel pageLabel){
-        return new Result(true, StatusCode.OK,"无条件分页查询成功");
+        List<Label> list = labelService.findSearch(pageLabel);
+        return new Result(true, StatusCode.OK,"条件查询成功",list);
     }
 
 }
