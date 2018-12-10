@@ -13,6 +13,8 @@
         <module>ts_recruit</module>
         <module>ts_qa</module>
         <module>ts_article</module>
+        <module>ts_gathering</module>
+        <module>ts_spit</module>
     </modules>
     <packaging>pom</packaging>
     <description>十次方</description>

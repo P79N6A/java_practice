@@ -1,0 +1,9 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: ts-spit    #指定服务名
+  data:
+    mongodb:
+      host: 192.168.8.22
+      database: spitdb
