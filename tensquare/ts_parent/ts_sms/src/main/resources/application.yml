@@ -1,0 +1,13 @@
+server:
+  port: 9009
+spring:
+  application:
+    name: ts-sms
+  rabbitmq:
+    host: 192.168.8.22
+aliyun:
+  sms:
+    accessKeyId: xxxxxx
+    accessKeySecret: xxxxxx
+    template_code: xxxxxx
+    sign_name: xxxxxx

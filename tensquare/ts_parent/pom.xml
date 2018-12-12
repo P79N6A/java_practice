@@ -15,8 +15,10 @@
         <module>ts_article</module>
         <module>ts_gathering</module>
         <module>ts_spit</module>
-        <module>search</module>
         <module>ts_search</module>
+        <module>ts_search</module>
+        <module>ts_sms</module>
+        <module>ts_user</module>
     </modules>
     <packaging>pom</packaging>
     <description>十次方</description>
