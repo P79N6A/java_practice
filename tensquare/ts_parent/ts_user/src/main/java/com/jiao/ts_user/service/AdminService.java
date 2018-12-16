@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @author Administrator
  *
  */
+@Transactional
 @Service
 public class AdminService {
 
@@ -31,6 +34,9 @@ public class AdminService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	/**
 	 * 查询全部列表
@@ -79,6 +85,9 @@ public class AdminService {
 	 * @param admin
 	 */
 	public void add(Admin admin) {
+		/**
+		 *
+		 */
 		admin.setId( idWorker.nextId()+"" );
 		adminDao.save(admin);
 	}
@@ -135,4 +144,20 @@ public class AdminService {
 
 	}
 
+	/**
+	 * 用户登录
+	 * 根据用户名到数据库查找admin对象
+	 * 没有  返回null
+	 * 有 则判断密码是否正确
+	 * 不正确返回null
+	 * 正确返回 admin
+	 * @param admin
+	 */
+	public Admin login(Admin admin) {
+		Admin loginadmin = adminDao.findByLoginname(admin.getLoginname());
+		if (loginadmin != null && encoder.matches(admin.getPassword(),loginadmin.getPassword())){
+			return loginadmin;
+		}
+		return null;
+	}
 }

@@ -10,5 +10,10 @@ import com.jiao.ts_user.pojo.Admin;
  *
  */
 public interface AdminDao extends JpaRepository<Admin,String>,JpaSpecificationExecutor<Admin>{
-	
+
+    /**
+     * 根据名称查找admin
+     */
+    Admin findByLoginname(String loginname);
+
 }

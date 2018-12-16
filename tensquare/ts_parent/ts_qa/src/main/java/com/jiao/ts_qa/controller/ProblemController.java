@@ -1,4 +1,5 @@
 package com.jiao.ts_qa.controller;
+import com.jiao.ts_qa.client.LabelClient;
 import com.jiao.ts_qa.pojo.Problem;
 import com.jiao.ts_qa.service.ProblemService;
 import entity.PageResult;
@@ -21,6 +22,15 @@ public class ProblemController {
 
 	@Autowired
 	private ProblemService problemService;
+
+	@Autowired
+	private LabelClient labelClient;
+
+
+	@RequestMapping(value = "/label/{labelId}",method = RequestMethod.GET)
+	public Result findById(@PathVariable String labelId){
+		return labelClient.findById(labelId);
+	}
 	
 	
 	/**
@@ -38,7 +48,7 @@ public class ProblemController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}",method= RequestMethod.GET)
-	public Result findById(@PathVariable String id){
+	public Result findByLabelId(@PathVariable String id){
 		return new Result(true,StatusCode.OK,"查询成功",problemService.findById(id));
 	}
 

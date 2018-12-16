@@ -4,10 +4,12 @@ import com.jiao.ts_article.service.ArticleService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 /**
  * 控制器层
@@ -21,6 +23,9 @@ public class ArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+
+	@Autowired
+	private HttpServletRequest request;
 	/**
 	 * 点赞
 	 */
@@ -84,9 +89,13 @@ public class ArticleController {
 	 * @param article
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public Result add(@RequestBody Article article  ){
-		articleService.add(article);
-		return new Result(true,StatusCode.OK,"增加成功");
+	public Result add(@RequestBody Article article){
+		Claims role_user = (Claims) request.getAttribute("role_user");
+		if (role_user != null){
+			articleService.add(article);
+			return new Result(true,StatusCode.OK,"增加成功");
+		}
+		return new Result(false,StatusCode.ERROR,"权限不足");
 	}
 	
 	/**

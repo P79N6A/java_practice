@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @author Administrator
  *
  */
+@Transactional
 @Service
 public class UserService {
 
@@ -31,6 +34,9 @@ public class UserService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	/**
 	 * 查询全部列表
@@ -155,4 +161,24 @@ public class UserService {
 
 	}
 
+	/**
+	 * 用户登录
+	 *
+	 * @param user
+	 */
+    public User login(User user) {
+		User loginUser = userDao.findByMobile(user.getMobile());
+		if (loginUser != null && encoder.matches(user.getPassword(),loginUser.getPassword())){
+			return loginUser;
+		}
+		return null;
+    }
+
+    public void updateFans(String userid, String num) {
+	userDao.updateFans(num, userid);
+    }
+
+	public void updateFollow(String userid, String num) {
+	userDao.updateFollow(num, userid);
+	}
 }

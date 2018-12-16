@@ -1,4 +1,5 @@
 package com.jiao.ts_user.controller;
+
 import com.jiao.ts_user.pojo.Admin;
 import com.jiao.ts_user.service.AdminService;
 import entity.PageResult;
@@ -6,8 +7,12 @@ import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import util.JwtUtil;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 /**
  * 控制器层
@@ -21,6 +26,12 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	private BCryptPasswordEncoder bCrypt;
+
+	@Autowired
+	private JwtUtil jwtUtil;
 	
 	
 	/**
@@ -72,6 +83,7 @@ public class AdminController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Admin admin  ){
+		admin.setPassword(bCrypt.encode(admin.getPassword()));
 		adminService.add(admin);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}
@@ -96,5 +108,29 @@ public class AdminController {
 		adminService.deleteById(id);
 		return new Result(true,StatusCode.OK,"删除成功");
 	}
+	/**
+	 *  用户登录
+	 */
+	@RequestMapping(value="/login",method= RequestMethod.POST)
+	public Result login(@RequestBody Admin admin, HttpServletResponse response){
+		/**
+		 * 调用登录方法  得放admin对象
+		 * 如果admin对象存在 则生成token  并在header中返回（在header中返回token更加安全）
+		 * 如果不存在  则返回登录失败
+		 *
+		 */
+
+		Admin loginAdmin = adminService.login(admin);
+		if (loginAdmin == null){
+			return new Result(false,StatusCode.LOGINERROR,"登陆失败");
+		}
+		String token = "JIao " + jwtUtil.createJWT(loginAdmin.getId(), loginAdmin.getLoginname(), "admin");
+		Map<String,Object> map = new HashMap();
+		map.put("token",token);
+		map.put("roles","admin");
+		response.setHeader("token",token);
+		return new Result(true,StatusCode.OK,"登录成功",map);
+	}
+
 	
 }

@@ -19,6 +19,8 @@
         <module>ts_search</module>
         <module>ts_sms</module>
         <module>ts_user</module>
+        <module>ts_eurekaServer</module>
+        <module>ts_friend</module>
     </modules>
     <packaging>pom</packaging>
     <description>十次方</description>
@@ -35,6 +37,18 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.M9</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -85,5 +99,7 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+
 
 </project>

@@ -5,14 +5,19 @@ import com.jiao.ts_user.service.UserService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import util.JwtUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -36,8 +41,33 @@ public class UserController {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
-	
+	@Autowired
+	private HttpServletRequest request;
+
+	@Autowired
+	private JwtUtil jwtUtil;
+
+	/**
+	 * 根据id更新粉丝数
+	 */
+	@RequestMapping(value = "/follow/myfans/{userid}/{num}",method = RequestMethod.PUT)
+	public Result updateFans(@PathVariable String userid,@PathVariable String num){
+		userService.updateFans(userid,num);
+		return new Result(true,StatusCode.OK,"更新成功");
+	}
+
+	/**
+	 * 根据id更新关注数
+	 */
+	@RequestMapping(value = "/follow/myfollow/{userid}/{num}",method = RequestMethod.PUT)
+	public Result updateFollow(@PathVariable String userid, @PathVariable String num){
+		userService.updateFollow(userid,num);
+		return new Result(true,StatusCode.OK,"更新成功");
+	}
+
 	/**
 	 * 查询全部数据
 	 * @return
@@ -87,6 +117,7 @@ public class UserController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody User user  ){
+
 		userService.add(user);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}
@@ -108,8 +139,22 @@ public class UserController {
 	 */
 	@RequestMapping(value="/{id}",method= RequestMethod.DELETE)
 	public Result delete(@PathVariable String id ){
-		userService.deleteById(id);
-		return new Result(true,StatusCode.OK,"删除成功");
+		/**
+		 *  从请求头中获取token
+		 *  token 不存在  返回 权限不足
+		 *  token 存在   判断token是不是以JIao开头
+		 *  不是 则返回 权限不足
+		 *  是 则 解析token
+		 *  解析成功  判断是否是admin角色   是  则允许删除
+		 *  不是则返回权限不足
+		 *  解析不成功  则返回权限不足
+		 */
+		Claims role_admin = (Claims) request.getAttribute("role_admin");
+		if (role_admin != null){
+			userService.deleteById(id);
+			return new Result(true,StatusCode.OK,"删除成功");
+		}
+		return new Result(false,StatusCode.ERROR,"权限不足");
 	}
 
 	/**
@@ -131,7 +176,7 @@ public class UserController {
 		Map<String,String> map = new HashMap<>();
 		map.put("mobile",mobile);
 		map.put("code",code);
-		rabbitTemplate.convertAndSend("sms",map);
+//		rabbitTemplate.convertAndSend("sms",map);
 		return new Result(true,StatusCode.OK,"发送成功");
 	}
 
@@ -155,8 +200,27 @@ public class UserController {
 		if (!StringUtils.equals(code,redisCode)){
 			return new Result(false,StatusCode.ERROR,"验证码错误");
 		}
+		user.setPassword(encoder.encode(user.getPassword()));
 		userService.add(user);
 		return new Result(true,StatusCode.OK,"注册成功");
 	}
+	/**
+	 * /user/login
+	 * 登陆
+	 */
+	@RequestMapping(method = RequestMethod.POST,value = "/login")
+	public Result login(@RequestBody User user , HttpServletResponse response){
 
+		User loginUser = userService.login(user);
+
+		if (loginUser == null){
+			return new Result(false,StatusCode.LOGINERROR,"登陆失败");
+		}
+		String token = "JIao " + jwtUtil.createJWT(loginUser.getId(), loginUser.getMobile(), "user");
+		Map<String,Object> map = new HashMap();
+		map.put("token",token);
+		map.put("roles","user");
+		response.setHeader("token",token);
+		return new Result(true,StatusCode.OK,"登录成功" , map);
+	}
 }

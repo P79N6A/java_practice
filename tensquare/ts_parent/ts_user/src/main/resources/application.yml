@@ -5,7 +5,7 @@ spring:
     name: ts-user #指定服务名
   datasource:  
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.8.22:3306/tensquare_user?useUnicode=true&amp;characterEncoding=UTF8
+    url: jdbc:mysql://192.168.8.22:3306/tensquare_user?characterEncoding=UTF8
     username: root
     password: 123456
   jpa: 
@@ -15,4 +15,13 @@ spring:
     host: 192.168.8.22
   rabbitmq:
     host: 192.168.8.22
-
+jwt:
+  config:
+    key: jiao
+    ttl: 3600000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true
