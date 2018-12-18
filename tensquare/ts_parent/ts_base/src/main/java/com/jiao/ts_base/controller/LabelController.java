@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/label")
+
 public class LabelController {
     @Autowired
     private LabelService labelService;

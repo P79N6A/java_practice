@@ -5,14 +5,14 @@ spring:
     name: ts-user #指定服务名
   datasource:  
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.8.22:3306/tensquare_user?characterEncoding=UTF8
+    url: jdbc:mysql://35.221.248.16/tensquare_user?characterEncoding=UTF8
     username: root
     password: 123456
   jpa: 
     database: MySQL
     show-sql: true
   redis:
-    host: 192.168.8.22
+    host: 35.221.248.16
   rabbitmq:
     host: 192.168.8.22
 jwt:

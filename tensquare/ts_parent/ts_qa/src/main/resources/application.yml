@@ -5,7 +5,7 @@ spring:
     name: ts-qa #指定服务名
   datasource:  
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.8.22:3306/tensquare_qa?useUnicode=true&amp;characterEncoding=UTF8
+    url: jdbc:mysql://35.221.248.16:3306/tensquare_qa?useUnicode=true&amp;characterEncoding=UTF8
     username: root
     password: 123456
   jpa: 
@@ -17,3 +17,6 @@ eureka:
       defaultZone: http://localhost:6868/eureka
   instance:
     prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
