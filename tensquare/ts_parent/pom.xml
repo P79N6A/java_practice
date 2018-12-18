@@ -23,6 +23,8 @@
         <module>ts_friend</module>
         <module>ts_zuul_manage</module>
         <module>ts_zuul_front</module>
+        <module>tsconfig</module>
+        <module>ts_config</module>
     </modules>
     <packaging>pom</packaging>
     <description>十次方</description>
