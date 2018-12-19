@@ -8,3 +8,13 @@ spring:
       server:
         git:
           uri: https://github.com/jjj2010/tensquare-config.git
+  rabbitmq:
+    host: 35.221.248.16
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+  endpoint:
+    bus-refresh:
+      enabled: true

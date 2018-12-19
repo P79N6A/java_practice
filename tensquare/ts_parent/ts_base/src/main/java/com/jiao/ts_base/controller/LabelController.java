@@ -7,6 +7,8 @@ import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,16 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
+@RefreshScope
 @RequestMapping("/label")
 
 public class LabelController {
     @Autowired
     private LabelService labelService;
+
+
+    @Value("${jwt.test}")
+    private int num;
 
     /**
      * 标签全部列表
@@ -64,7 +71,7 @@ public class LabelController {
      */
     @RequestMapping(value = "/{labelId}",method = RequestMethod.GET)
     public Result findById(@PathVariable String labelId){
-        System.out.println("第3个");
+        System.out.println("数字是：" + num);
         Label label = labelService.findById(labelId);
         Result result = new Result(true, StatusCode.OK, "根据ID查询成功");
         result.setData(label);

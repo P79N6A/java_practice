@@ -16,14 +16,12 @@
         <module>ts_gathering</module>
         <module>ts_spit</module>
         <module>ts_search</module>
-        <module>ts_search</module>
         <module>ts_sms</module>
         <module>ts_user</module>
-        <module>ts_eurekaServer</module>
+        <module>ts_eurekaserver</module>
         <module>ts_friend</module>
         <module>ts_zuul_manage</module>
         <module>ts_zuul_front</module>
-        <module>tsconfig</module>
         <module>ts_config</module>
     </modules>
     <packaging>pom</packaging>
